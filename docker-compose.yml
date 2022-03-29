@@ -14,9 +14,9 @@ services:
     volumes:
       - .:/var/www/appjobs
       - ./docker/php-fpm/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-    networks: 
+    networks:
       - appjobs
-  
+
   appjobsnginx:
     container_name: appjobs-nginx
     build:
@@ -34,6 +34,8 @@ services:
   appjobsdb:
     container_name: appjobs-db
     image: mysql:latest
+    ports:
+        - "3306:3306"
     volumes:
       - data:/var/lib/mysql
     environment:
