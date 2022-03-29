@@ -1,0 +1,50 @@
+version: '3.5'
+
+services:
+  appjobsphp:
+    build:
+      context: ./
+      dockerfile: ./docker/php-fpm/Dockerfile
+      args:
+        uid: ${UID:-1000}
+        gid: ${GID:-1000}
+    container_name: appjobs-php
+    depends_on:
+      - appjobsdb
+    volumes:
+      - .:/var/www/appjobs
+      - ./docker/php-fpm/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+    networks: 
+      - appjobs
+  
+  appjobsnginx:
+    container_name: appjobs-nginx
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - appjobsdb
+    volumes:
+      - .:/var/www/appjobs
+    ports:
+      - "80:80"
+    networks:
+      - appjobs
+
+  appjobsdb:
+    container_name: appjobs-db
+    image: mysql:latest
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOTPASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    networks:
+      - appjobs
+
+networks:
+  appjobs:
+volumes:
+  data:
