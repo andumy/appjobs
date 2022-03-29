@@ -11,18 +11,18 @@ class OffersCleanerService
 
     public function processArtifacts(): void{
         Offer::each(function(Offer $offer){
-            $shouldUpdate = $this->cleanArtifacts(
+            $titleUpdate = $this->cleanArtifacts(
                 $offer,
                 'title',
                 $this->extractTextArtifacted($offer->title)
-            ) ||
-            $this->cleanArtifacts(
+            );
+            $descriptionUpdate = $this->cleanArtifacts(
                 $offer,
                 'description',
                 $this->extractTextArtifacted($offer->description)
             );
 
-            if($shouldUpdate) {
+            if($titleUpdate || $descriptionUpdate) {
                 $offer->save();
             }
 
