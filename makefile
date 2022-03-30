@@ -24,3 +24,7 @@ docker-bash:
 
 solve:
 	docker exec -u appjobsuser:appjobsgroup appjobs-php php artisan clean:artifacts
+
+test:
+	docker exec -u appjobsuser:appjobsgroup appjobs-php ./vendor/bin/phpunit
+

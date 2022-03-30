@@ -10,9 +10,14 @@ use Illuminate\Http\Request;
 class ParserController extends Controller
 {
     public function parseXml(XmlParseRequest $request, ParserService $parserService){
+        try{
+            $json = $parserService->convertXmlToJson($request->url);
+            return response()->json($json);
+        } catch (\Exception $e){
+            return response()->json([
+                'error' => $e->getMessage()
+            ],500);
+        }
 
-        return response()->json(
-            $parserService->convertXmlToJson($request->url)
-        ,200);
     }
 }
