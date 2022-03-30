@@ -3,7 +3,6 @@
 namespace App\Dto;
 
 
-use App\Enum\XmlLevelEnum;
 
 class XmlStateDto
 {
