@@ -51,6 +51,7 @@ An extra layer of optimisation would consist in attaching a queueing messaging s
 ## Important files
 - `App\Http\Services\OffersCleanerService` - Service responsible for detection and fix of the artifacts;
 - `Database\Factories\OfferFactory` - Faker based generator with variable percentage of artifact;
-- 
+- `App\Console\Commands\CleanArtifacts` - Command responsible with launching the correction process;
+
 # Challenge 2 "XML Parser"
 

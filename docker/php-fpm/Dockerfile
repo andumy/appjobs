@@ -8,6 +8,7 @@ RUN apt-get install -y \
     curl \
     sudo \
     unzip \
+    libxml2-dev \
     libicu-dev \
     libbz2-dev \
     libzip-dev \
@@ -28,6 +29,7 @@ RUN docker-php-ext-install \
     opcache \
     calendar \
     pdo_mysql \
+    simplexml \
     zip \
     pdo \
     mysqli
